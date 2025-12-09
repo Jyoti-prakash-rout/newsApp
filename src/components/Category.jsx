@@ -1,11 +1,28 @@
 import React from "react";
 import Wrapper from "./Wrapper";
 
-const Category = () => {
+const Category = ({ className }) => {
+  const categories = [
+    "business",
+    "entertainment",
+    "general",
+    "health",
+    "science",
+    "sports",
+    "technology",
+  ];
   return (
     <>
       <Wrapper>
-        <button className="btn btn-primary">Primary</button>
+        <div
+          className={`max-w-full w-fit m-auto flex overflow-x-auto px-4 scrollbar-none gap-5  ${className} `}>
+          {categories.map((category) => (
+            <button key={category} className="btn btn-primary">
+              {" "}
+              {category}{" "}
+            </button>
+          ))}
+        </div>
       </Wrapper>
     </>
   );
