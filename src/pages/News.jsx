@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Wrapper from "../components/Wrapper";
 import Card from "../components/Card";
+import api from "../config/axios";
 
+import axios from "axios";
 const News = ({ className }) => {
+  const fetchNews = async () => {
+    const response = await api.get(
+      `/everything?q=tesla&apiKey=${import.meta.env.VITE_API_KEY}`
+    );
+  };
+  useEffect(() => {}, []);
   return (
     <>
       <Wrapper>
