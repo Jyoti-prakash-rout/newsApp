@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import api from "../config/axios";
+import axios from "axios";
 
 const NewsContext = createContext();
 
@@ -10,9 +11,7 @@ const NewsContextProvider = ({ children }) => {
   const fetchNews = async (url = "/everything?q=india") => {
     setLoading(true);
     try {
-      const response = await api.get(
-        `${url}&apiKey=${import.meta.env.VITE_API_KEY}`
-      );
+      const response = await axios.get(`/.netlify/functions/news`);
       setLoading(false);
       return response.data;
 		} catch (error) {

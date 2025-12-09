@@ -13,7 +13,7 @@ const Card = ({ details }) => {
         </figure>
         <div className="card-body">
           <h2 className="card-title line-clamp-2">{details?.title}</h2>
-          <p className="line-clamp-3">{details.description}</p>
+          <p className="line-clamp-3">{details?.description}</p>
           <div className="card-actions justify-end mt-4">
             <button
               onClick={() => window.open(details?.url)}
