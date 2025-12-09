@@ -1,9 +1,29 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useState } from "react";
+import api from "../config/axios";
 
 const NewsContext = createContext();
 
 const NewsContextProvider = ({ children }) => {
-  return <NewsContext.Provider>{children}</NewsContext.Provider>;
+  const [news, setNews] = useState([]);
+
+  const fetchNews = async (url = "/everything?q=india") => {
+    try {
+      const response = await api.get(
+        `${url}&apiKey=${import.meta.env.VITE_API_KEY}`
+      );
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const values = {
+    news,
+    setNews,
+    fetchNews,
+  };
+
+  return <NewsContext.Provider value={values}>{children}</NewsContext.Provider>;
 };
 
 const useNewsContext = () => {
@@ -11,4 +31,3 @@ const useNewsContext = () => {
 };
 
 export { NewsContextProvider, useNewsContext };
- 

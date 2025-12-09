@@ -1,23 +1,25 @@
 import React from "react";
 
-const Card = () => {
+const Card = ({ details }) => {
   return (
     <>
       <div className="card bg-base-200 shadow-sm">
         <figure>
           <img
-            src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-            alt="Shoes"
+            className="w-full aspect-video object-contain"
+            src={details?.urlToImage}
+            alt={details.name}
           />
         </figure>
         <div className="card-body">
-          <h2 className="card-title">Card Title</h2>
-          <p>
-            A card component has a figure, a body part, and inside body there
-            are title and actions parts
-          </p>
-          <div className="card-actions justify-end">
-            <button className="btn btn-primary">Buy Now</button>
+          <h2 className="card-title line-clamp-2">{details?.title}</h2>
+          <p className="line-clamp-3">{details.description}</p>
+          <div className="card-actions justify-end mt-4">
+            <button
+              onClick={() => window.open(details?.url)}
+              className=" badge-outline btn">
+              Full Story
+            </button>
           </div>
         </div>
       </div>

@@ -2,27 +2,24 @@ import React, { useEffect } from "react";
 import Wrapper from "../components/Wrapper";
 import Card from "../components/Card";
 import api from "../config/axios";
+import { useNewsContext } from "../context/NewsContext";
 
-import axios from "axios";
 const News = ({ className }) => {
-  const fetchNews = async () => {
-    const response = await api.get(
-      `/everything?q=tesla&apiKey=${import.meta.env.VITE_API_KEY}`
-    );
-  };
-  useEffect(() => {}, []);
+  const { news, setNews, fetchNews } = useNewsContext();
+  useEffect(() => {
+    (async () => {
+      const data = await fetchNews();
+      setNews(data.articles);
+    })();
+  }, []);
   return (
     <>
       <Wrapper>
         <div className={`grid grid-cols-4 gap-6 ${className} `}>
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          {news.map((newsDetails) => {
+            if (!newsDetails.urlToImage) return;
+            return <Card details={newsDetails} key={newsDetails.url} />;
+          })}
         </div>
       </Wrapper>
     </>
