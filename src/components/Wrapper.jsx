@@ -1,7 +1,7 @@
 import React from "react";
 
-const Wrapper = ({ childrean }) => {
-  return <div className="max-w-280 m-auto"> {childrean} </div>;
+const Wrapper = ({ children }) => {
+  return <div className="max-w-7xl m-auto"> {children} </div>;
 };
 
 export default Wrapper;
