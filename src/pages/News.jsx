@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import Wrapper from "../components/Wrapper";
 import Card from "../components/Card";
-import api from "../config/axios";
 import { useNewsContext } from "../context/NewsContext";
 
 const News = ({ className }) => {
@@ -17,7 +16,7 @@ const News = ({ className }) => {
       <Wrapper>
         <div className={`grid grid-cols-4 gap-6 ${className} `}>
           {news.map((newsDetails) => {
-            if (!newsDetails.urlToImage) return;
+            if (!newsDetails.urlToImage) return null;
             return <Card details={newsDetails} key={newsDetails.url} />;
           })}
         </div>

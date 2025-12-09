@@ -1,6 +1,18 @@
+import { useEffect, useState } from "react";
 import Wrapper from "./Wrapper";
+import { useNewsContext } from "../context/NewsContext";
 
 const Navbar = () => {
+  const [search, setSearch] = useState("");
+
+  const { fetchNews, setNews } = useNewsContext();
+
+  useEffect(() => {
+    (async () => {
+      const data = await fetchNews(`/everything?q=${search}`);
+      setNews(data.articles);
+    })();
+  }, [search]);
   return (
     <>
       <div className="bg-base-200">
@@ -14,6 +26,8 @@ const Navbar = () => {
               <input
                 type="text"
                 placeholder="Search"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
                 className="input input-bordered w-24 md:w-auto"
               />
               <button className="btn btn-ghost btn-circle">
