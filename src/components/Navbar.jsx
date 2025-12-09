@@ -7,10 +7,16 @@ const Navbar = () => {
 
   const { fetchNews, setNews } = useNewsContext();
 
+  let timer;
+
   useEffect(() => {
-    (async () => {
-      const data = await fetchNews(`/everything?q=${search}`);
-      setNews(data.articles);
+    (() => {
+      if (!search) return;
+      clearTimeout(timer);
+      timer = setTimeout(async () => {
+        const data = await fetchNews(`/everything?q=${search}`);
+        setNews(data.articles);
+      }, 2000);
     })();
   }, [search]);
   return (
